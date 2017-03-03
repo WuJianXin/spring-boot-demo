@@ -1,20 +1,20 @@
 package springBootDemo.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springBootDemo.dao.PersonDao;
 import springBootDemo.domain.Person;
 
 @Service
+@Transactional
 public class PersonService {
-	private static Map<Integer,Person> map=new HashMap<>();
-	static {
-		map.put(1,new Person(1,"zhangsan"));
-		map.put(2,new Person(2,"lisi"));
-	}
+	@Autowired
+	private PersonDao dao;
+	
 	public Person getById(int id){
-		return map.get(id);
+		return dao.getById(id);
 	}
 }
